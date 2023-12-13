@@ -14,7 +14,7 @@ To address the issue Java 8 introduced the `Optional` class which can hold eithe
 
 Using `Optional` effectively removes `null` from a language where `null` values can explicitly represent valid parameters and return types.
 
-Maybe is `null` aware monad. Meaning unlike `Optional` it does not use `null` to signify the _absence_ of a value.
+Maybe is a `null` aware monad. Meaning unlike `Optional` it does not use `null` to signify the _absence_ of a value.
 
 Do yourself a favor and start writing code like this:
 
