@@ -8,7 +8,7 @@ Managing code that handles _optional_ values is often complex and cumbersome.
 
 Prior to Java 8 optional values were usually represented as `null`s. For example `Map.get(K key)` returns a `null` value if there is no mapping for the requested key. **But** a `null` value can sometimes be a valid return type for maps which support `null` values. And then there are maps which support `null` keys as well.
 
-As we all know code that handles (or forgets to handle) `null`s cases is an incredibly common source of errors.
+As we all know writing code that handles (or forgets to handle) `null`s cases is an incredibly common source of errors.
 
 To address the issue Java 8 introduced the `Optional` class which can hold either a single non-`null` value or _nothing at all_. So what's the problem?
 
