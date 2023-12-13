@@ -245,7 +245,7 @@ class MaybeTest {
     }
 
     @Test
-    void test_orElse_runnable() {
+    void test_otherwise() {
         final Maybe<String> absent = Maybe.absent();
         final StringBuilder result = new StringBuilder();
 
