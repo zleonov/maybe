@@ -31,4 +31,4 @@ Do yourself a favor and start writing code like this:
 
 Documentation
 -------------
-The latest API documentation can be accessed [here](https://zleonov.github.io/optional-config/api/latest).
+The latest API documentation can be accessed [here](https://zleonov.github.io/maybe/api/latest).
