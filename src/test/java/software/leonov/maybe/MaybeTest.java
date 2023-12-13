@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 class MaybeTest {
-    
+
     @Test
     void test_absent() {
         final Maybe<String> absent = Maybe.absent();
@@ -127,7 +127,7 @@ class MaybeTest {
     @Test
     void test_ifNotNull_present() {
         final Maybe<String> present = Maybe.of("Hello");
-        final StringBuilder  result  = new StringBuilder();
+        final StringBuilder result  = new StringBuilder();
 
         present.ifNotNull(result::append);
 
@@ -136,8 +136,8 @@ class MaybeTest {
 
     @Test
     void test_ifNotNull_null() {
-        final Maybe<String> maybe = Maybe.of(null);
-        final StringBuilder  result = new StringBuilder();
+        final Maybe<String> maybe  = Maybe.of(null);
+        final StringBuilder result = new StringBuilder();
 
         maybe.ifNotNull(result::append);
 
@@ -170,8 +170,8 @@ class MaybeTest {
 
     @Test
     void test_ifNull_runnable() {
-        final Maybe<String> maybe = Maybe.of(null);
-        final StringBuilder  result = new StringBuilder();
+        final Maybe<String> maybe  = Maybe.of(null);
+        final StringBuilder result = new StringBuilder();
 
         maybe.ifNull(() -> result.append("Value is null"));
 
@@ -181,7 +181,7 @@ class MaybeTest {
     @Test
     void test_ifPresent_present() {
         final Maybe<String> present = Maybe.of("Hello");
-        final StringBuilder  result  = new StringBuilder();
+        final StringBuilder result  = new StringBuilder();
 
         present.ifPresent(result::append);
 
@@ -191,7 +191,7 @@ class MaybeTest {
     @Test
     void test_ifPresent_absent() {
         final Maybe<String> absent = Maybe.absent();
-        final StringBuilder  result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
 
         absent.ifPresent(result::append);
 
@@ -247,9 +247,9 @@ class MaybeTest {
     @Test
     void test_orElse_runnable() {
         final Maybe<String> absent = Maybe.absent();
-        final StringBuilder  result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
 
-        absent.orElse(() -> result.append("Value is absent"));
+        absent.otherwise(() -> result.append("Value is absent"));
 
         assertEquals("Value is absent", result.toString());
     }
@@ -257,7 +257,7 @@ class MaybeTest {
     @Test
     void test_orElse_supplier() {
         final Maybe<String> absent = Maybe.absent();
-        final String         value  = absent.orElse(() -> "default");
+        final String        value  = absent.orElse(() -> "default");
 
         assertEquals("default", value);
     }
@@ -279,7 +279,7 @@ class MaybeTest {
     @Test
     void test_orNull_present() {
         final Maybe<String> present = Maybe.of("Hello");
-        final String         value   = present.orNull();
+        final String        value   = present.orNull();
 
         assertEquals("Hello", value);
     }

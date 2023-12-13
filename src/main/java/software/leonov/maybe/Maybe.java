@@ -284,7 +284,7 @@ public class Maybe<T> {
      * @param runnable the specified runnable
      * @return {@code this} {@link Maybe} instance
      */
-    public Maybe<T> orElse(final Runnable runnable) {
+    public Maybe<T> otherwise(final Runnable runnable) {
         requireNonNull(runnable, "runnable == null");
         if (!isPresent)
             runnable.run();
