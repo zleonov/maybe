@@ -1,6 +1,6 @@
 Maybe
 =====
-A `null` aware monadic _Maybe_ type in idomatic Java.
+A `null` aware monadic _maybe_ type in idiomatic Java.
 
 Overview
 --------
