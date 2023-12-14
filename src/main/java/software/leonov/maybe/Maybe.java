@@ -128,7 +128,7 @@ public class Maybe<T> {
      * @return the possibly {@link #isNull() null} value if it is {@link #isPresent() present} or the {@code defaultValue}
      *         otherwise
      */
-    public T orElse(final T defaultValue) {
+    public T defaultTo(final T defaultValue) {
         return isPresent ? value : defaultValue;
     }
 
@@ -299,7 +299,7 @@ public class Maybe<T> {
      * @return the possibly {@link #isNull() null} value if it is {@link #isPresent() present} or {@link Supplier#get()}
      *         otherwise
      */
-    public T orElse(final Supplier<? extends T> supplier) {
+    public T orElseGet(final Supplier<? extends T> supplier) {
         requireNonNull(supplier, "supplier == null");
         return isPresent ? value : supplier.get();
     }
@@ -328,7 +328,7 @@ public class Maybe<T> {
      * @return the possibly {@link #isNull() null} value if it is {@link #isPresent() present} or the {@code null} otherwise
      */
     public T orNull() {
-        return orElse((T) null);
+        return defaultTo((T) null);
     }
 
     /**

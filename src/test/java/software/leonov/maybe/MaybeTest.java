@@ -37,7 +37,7 @@ class MaybeTest {
 
         final Maybe<String> value = Maybe.get(map, "key");
 
-        assertEquals("value", value.orElse("default"));
+        assertEquals("value", value.defaultTo("default"));
     }
 
     @Test
@@ -46,7 +46,7 @@ class MaybeTest {
 
         final Maybe<String> absent = Maybe.get(map, "unknown");
 
-        assertEquals("default", absent.orElse("default"));
+        assertEquals("default", absent.defaultTo("default"));
     }
 
     @Test
@@ -75,23 +75,23 @@ class MaybeTest {
 //    }
 
     @Test
-    void test_orElse_present() {
+    void test_defaultTo_present() {
         final Maybe<String> present = Maybe.of("Hello");
 
-        assertEquals("Hello", present.orElse("default"));
+        assertEquals("Hello", present.defaultTo("default"));
     }
 
     @Test
-    void test_orElse_null() {
+    void test_defaultTo_null() {
         final Maybe<String> maybe = Maybe.of(null);
 
-        assertNull(maybe.orElse("default"));
+        assertNull(maybe.defaultTo("default"));
     }
 
     @Test
-    void test_orElse_absent() {
+    void test_defaultTo_absent() {
         final Maybe<String> absent = Maybe.absent();
-        assertEquals("default", absent.orElse("default"));
+        assertEquals("default", absent.defaultTo("default"));
     }
 
     @Test
@@ -255,9 +255,9 @@ class MaybeTest {
     }
 
     @Test
-    void test_orElse_supplier() {
+    void test_orElseGet() {
         final Maybe<String> absent = Maybe.absent();
-        final String        value  = absent.orElse(() -> "default");
+        final String        value  = absent.orElseGet(() -> "default");
 
         assertEquals("default", value);
     }
