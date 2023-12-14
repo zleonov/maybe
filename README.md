@@ -6,7 +6,7 @@ Overview
 --------
 Managing code that handles _optional_ values is often complex and cumbersome.
 
-Prior to Java 8, optional values were usually represented using `null` values. For example `Map.get(K key)` returns a `null` if there is no mapping for the requested key. **But** `null` values can also be valid return types. For example from maps which support `null` values. And then there are maps which support `null` keys as well.
+Prior to Java 8, optional values were usually represented using `null` values. For example `Map.get(K key)` returns a `null` if there is no mapping for the requested key. **But** `null` values can also be valid return types. For example from maps which support `null` values.
 
 As we all know writing code that handles (or forgets to handle) `null` cases is an incredibly common source of errors.
 
