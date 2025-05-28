@@ -17,6 +17,8 @@ package software.leonov.maybe;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -25,7 +27,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * A immutable container which may or may not hold a {@code nullable} value. This class is the analog of Java's
@@ -284,7 +288,7 @@ public class Maybe<T> {
      * @param runnable the specified runnable
      * @return {@code this} {@link Maybe} instance
      */
-    public Maybe<T> otherwise(final Runnable runnable) {
+    public Maybe<T> ifAbsent(final Runnable runnable) {
         requireNonNull(runnable, "runnable == null");
         if (!isPresent)
             runnable.run();
@@ -386,6 +390,50 @@ public class Maybe<T> {
     @Override
     public String toString() {
         return String.format("%s[%s", Maybe.class.getSimpleName(), isPresent() ? value + "]" : "]");
+    }
+
+    /**
+     * Returns the first {@link #isPresent() present} {@code Maybe} from the specified {@code Maybe} instances or
+     * {@link Maybe#absent()} otherwise.
+     * 
+     * @param <T>    the type of values
+     * @param first  the {@code Maybe}
+     * @param second the second {@code Maybe}
+     * @param rest   additional {@code Maybe} instances
+     * @return the first {@link #isPresent() present} {@code Maybe} from the specified {@code Maybe} instances or
+     *         {@link Maybe#absent()} otherwise
+     */
+    @SuppressWarnings("unchecked")
+    @SafeVarargs
+    public static <T> Maybe<T> firstPresent(final Maybe<? extends T> first, final Maybe<? extends T> second, final Maybe<? extends T>... rest) {
+        requireNonNull(first, "first == null");
+        requireNonNull(second, "first == null");
+        requireNonNull(rest, "first == null");
+
+        if (first.isPresent())
+            return (Maybe<T>) first;
+
+        if (second.isPresent())
+            return (Maybe<T>) second;
+
+        for (final Maybe<? extends T> opt : rest)
+            if (opt.isPresent())
+                return (Maybe<T>) opt;
+
+        return Maybe.absent();
+    }
+
+    /**
+     * Returns all {@link Maybe#isPresent() present} values of the specified {@code Maybe} instances.
+     * 
+     * @param <T>    the type of value
+     * @param maybes the specified {@code Maybe} instances
+     * @return all {@link Maybe#isPresent() present} values of the specified {@code Maybe} instances
+     */
+    public static <T> List<T> present(final Iterable<? extends Maybe<? extends T>> maybes) {
+        requireNonNull(maybes, "maybes == null");
+        final Stream<? extends Maybe<? extends T>> stream = maybes instanceof Collection ? ((Collection<? extends Maybe<? extends T>>) maybes).stream() : StreamSupport.stream(maybes.spliterator(), false);
+        return stream.filter(Maybe::isPresent).map(Maybe::get).collect(Collectors.toList());
     }
 
 }

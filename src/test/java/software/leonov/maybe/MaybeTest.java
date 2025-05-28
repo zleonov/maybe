@@ -249,7 +249,7 @@ class MaybeTest {
         final Maybe<String> absent = Maybe.absent();
         final StringBuilder result = new StringBuilder();
 
-        absent.otherwise(() -> result.append("Value is absent"));
+        absent.ifAbsent(() -> result.append("Value is absent"));
 
         assertEquals("Value is absent", result.toString());
     }
@@ -321,14 +321,14 @@ class MaybeTest {
 
     @Test
     void test_equals_hashCode() {
-        final Maybe<String> option1 = Maybe.of("Hello");
-        final Maybe<String> option2 = Maybe.of("Hello");
-        final Maybe<String> option3 = Maybe.of("World");
+        final Maybe<String> one = Maybe.of("Hello");
+        final Maybe<String> two = Maybe.of("Hello");
+        final Maybe<String> three = Maybe.of("World");
 
-        assertEquals(option1, option2);
-        assertNotEquals(option1, option3);
-        assertEquals(option1.hashCode(), option2.hashCode());
-        assertNotEquals(option1.hashCode(), option3.hashCode());
+        assertEquals(one, two);
+        assertNotEquals(one, three);
+        assertEquals(one.hashCode(), two.hashCode());
+        assertNotEquals(one.hashCode(), three.hashCode());
     }
 
     @Test

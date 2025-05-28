@@ -23,10 +23,10 @@ Do yourself a favor and start writing code like this:
         
         ...
         
-        final String value = maybe.ifNull(() ->    logger.fine("value is null"))
-                                  .ifNotNull(t ->  logger.fine("value is " + t))
-                                  .otherwise(() -> logger.fine("value is absent: using default value"))
-                                  .defaultTo(DEFAULT_VALUE);
+        final String value = maybe.ifNull(() ->   logger.fine("value is null"))
+                                  .ifNotNull(t -> logger.fine("value is %s", t))
+                                  .ifAbsent(() -> logger.fine("value is absent: using default value"))
+                                  .orElse(DEFAULT_VALUE);
 ```
 
 Documentation
